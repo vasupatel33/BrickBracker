@@ -5,10 +5,13 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject LeftBorder, RightBorder, UpBorder, DownBorder;
+    public static GameManager instance;
+    public Vector2 screenSize;
     private void Awake()
     {
+        instance = this;
         Vector2 size = new Vector2(Screen.width, Screen.height);
-        Vector2 screenSize = Camera.main.ScreenToWorldPoint(size);
+        screenSize = Camera.main.ScreenToWorldPoint(size);
 
         LeftBorder.GetComponent<BoxCollider2D>().size = new Vector2(1, screenSize.y * 2);
         LeftBorder.transform.position = new Vector2(-screenSize.x + LeftBorder.GetComponent<BoxCollider2D>().size.x/2 - 1, 0);
@@ -20,6 +23,6 @@ public class GameManager : MonoBehaviour
         UpBorder.transform.position = new Vector2(0, screenSize.y - UpBorder.GetComponent<BoxCollider2D>().size.y / 2 + 1);
 
         DownBorder.GetComponent<BoxCollider2D>().size = new Vector2(screenSize.x * 2, 1);
-        DownBorder.transform.position = new Vector2(0, screenSize.y - DownBorder.GetComponent<BoxCollider2D>().size.y / 2 + 1);
+        DownBorder.transform.position = new Vector2(0, -screenSize.y - DownBorder.GetComponent<BoxCollider2D>().size.y / 2 - 1);
     }
 }
