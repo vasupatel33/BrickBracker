@@ -80,6 +80,6 @@ public class GameManager : MonoBehaviour
     }
     public void ThrowBall()
     {
-        BallObject.GetComponent<Rigidbody2D>().AddForce(new Vector3(currentPosX, currentPosY, 0) * 500);
+        BallObject.GetComponent<Rigidbody2D>().AddForce(new Vector3(currentPosX, currentPosY, 0) * 350);
     }
 }
