@@ -15,7 +15,6 @@ public class BrickManager : MonoBehaviour
             Debug.Log("Collide");
             if (particle != null)
             {
-                particle.
                 Vector3 collisionPosition = collision.GetContact(0).point;
                 particle.transform.position = collisionPosition;
                 particle.Play();

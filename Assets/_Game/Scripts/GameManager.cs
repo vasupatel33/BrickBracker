@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
         {
             BallObject.transform.position = new Vector3(paddleObject.transform.position.x, paddleObject.transform.position.y + 0.5f, paddleObject.transform.position.z);
             BallTargetObject.transform.position = new Vector3(BallObject.transform.position.x, BallObject.transform.position.y + 0.5f, BallObject.transform.position.z);
-            Debug.Log("Release called");
+            //Debug.Log("Release called");
             if (Input.GetMouseButtonDown(0))
             {
                 Vector3 startPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
