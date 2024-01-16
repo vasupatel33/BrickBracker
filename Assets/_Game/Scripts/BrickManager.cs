@@ -27,6 +27,7 @@ public class BrickManager : MonoBehaviour
             }
             else
             {
+                particle.Play();
                 Destroy(this.gameObject);
             }
         }

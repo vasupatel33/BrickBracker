@@ -42,8 +42,7 @@ public class GameManager : MonoBehaviour
                 g.transform.position = new Vector3(j * 1.2f,i,0);
             }
         }
-        float val = Screen.height / 2;
-        parent.transform.position = new Vector3();
+        parent.transform.position = new Vector2(screenSize.x - screenSize.x * 2,screenSize.y - screenSize.y - 0.5f);
     }
     public bool isRelease;
     Vector3 currentPos;
@@ -80,6 +79,6 @@ public class GameManager : MonoBehaviour
     }
     public void ThrowBall()
     {
-        BallObject.GetComponent<Rigidbody2D>().AddForce(new Vector3(currentPosX, currentPosY, 0) * 350);
+        BallObject.GetComponent<Rigidbody2D>().AddForce(new Vector3(currentPosX, currentPosY, 0) * 200);
     }
 }

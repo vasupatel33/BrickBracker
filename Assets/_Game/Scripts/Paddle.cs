@@ -8,15 +8,12 @@ public class Paddle : MonoBehaviour
     {
         if (GameManager.instance.isRelease)
         {
-            Debug.Log("Padle called");
             Vector3 nextPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             nextPos.z = 0;
             nextPos.y = transform.position.y;
 
             nextPos.x = Mathf.Clamp(nextPos.x, -GameManager.instance.screenSize.x + transform.GetComponent<BoxCollider2D>().size.x / 2, GameManager.instance.screenSize.x - transform.GetComponent<BoxCollider2D>().size.x / 2);
             transform.position = nextPos;
-            Debug.Log("X is = " + -GameManager.instance.screenSize.x);
-            Debug.Log("Box is = " + transform.GetComponent<BoxCollider2D>().size.x / 2);
         }
     }
 }
