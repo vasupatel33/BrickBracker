@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using DG.Tweening;
+
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject LeftBorder, RightBorder, UpBorder, DownBorder, parent;
@@ -33,15 +32,45 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        for(int i= 1; i <= 5; i++)
+        int value = Random.Range(0,2);
+
+        switch(value)
         {
-            for(int j=1; j <= 4; j++)
-            {
-                GameObject g = Instantiate(AllBricks[Random.Range(0, AllBricks.Count)],parent.transform);
-                g.transform.localScale = new Vector3(0.8f,0.8f,0.8f);
-                g.transform.position = new Vector3(j * 1.2f,i,0);
-            }
+            case 0:
+                for (int i = 1; i <= 5; i++)
+                {
+                    for (int j = 1; j <= 4; j++)
+                    {
+                        GameObject g = Instantiate(AllBricks[Random.Range(0, AllBricks.Count)], parent.transform);
+                        g.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+                        g.transform.position = new Vector3(j * 1.2f, i, 0);
+                    }
+                }
+                break;
+            case 1:
+                for (int i = 1; i <= 5; i++)
+                {
+                    for (int j = 1; j <= 4; j++)
+                    {
+                        if (i == 1 || i == 5 || j == 1 || j == 4)
+                        {
+                            GameObject g = Instantiate(AllBricks[Random.Range(0, AllBricks.Count)], parent.transform);
+                            g.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+                            g.transform.position = new Vector3(j * 1.2f, i, 0);
+                        }
+                    }
+                }
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            default: 
+                break;
         }
+        
         parent.transform.position = new Vector2(screenSize.x - screenSize.x * 2,screenSize.y - screenSize.y - 0.5f);
     }
     public bool isRelease;

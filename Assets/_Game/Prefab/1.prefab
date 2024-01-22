@@ -100,7 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BrockenSprite: {fileID: 21300000, guid: 2544993ea610f2440aa246ca87786232, type: 3}
-  particle: {fileID: 5802090234075221748}
+  parent: {fileID: 0}
+  particle: {fileID: 0}
 --- !u!61 &-2551945434941756316
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -294,10 +295,5 @@ PrefabInstance:
 --- !u!4 &2716845153711018119 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1202661976756208523, guid: 348489aba3d9e494f9704873cf70a82b, type: 3}
-  m_PrefabInstance: {fileID: 3820348773822075660}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &5802090234075221748 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 7314321489339260408, guid: 348489aba3d9e494f9704873cf70a82b, type: 3}
   m_PrefabInstance: {fileID: 3820348773822075660}
   m_PrefabAsset: {fileID: 0}
