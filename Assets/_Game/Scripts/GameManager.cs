@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using DG.Tweening;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject LeftBorder, RightBorder, UpBorder, DownBorder, parent;
@@ -64,8 +64,8 @@ public class GameManager : MonoBehaviour
                 currentPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 currentPosX = Mathf.Clamp(currentPos.x, -3, 3);
                 currentPosY = Mathf.Abs(currentPos.y);
-                Debug.Log("X val = "+currentPosX);
-                Debug.Log("YY val = "+currentPosY);
+                //Debug.Log("X val = " + currentPosX);
+                //Debug.Log("YY val = " + currentPosY);
                 BallTargetObject.transform.up = new Vector3(currentPosX, currentPosY, 0);
             }
             if (Input.GetMouseButtonUp(0))
@@ -77,8 +77,32 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+    int throwSpeed;
     public void ThrowBall()
     {
-        BallObject.GetComponent<Rigidbody2D>().AddForce(new Vector3(currentPosX, currentPosY, 0) * 200);
+            throwSpeed = 200;
+        if (currentPosY > 1.2f || currentPosX > 1.2f)
+        {
+            Debug.Log("Iff");
+            throwSpeed = 250;
+        }
+        else if (currentPosY < 0.5f || currentPosX < 0.5f)
+        {
+            throwSpeed = 250;
+        }
+        else
+        {
+            Debug.Log("else");
+            throwSpeed = 220;
+        }
+        //BallObject.GetComponent<Rigidbody2D>().velocity = new Vector3(currentPosX, currentPosY, 0);
+        //BallObject.GetComponent<Rigidbody2D>().AddForce(new Vector3(currentPosX, currentPosY, 0) * throwSpeed);
+        Vector2 throwDirection = new Vector2(currentPosX, currentPosY).normalized;
+
+        // Apply force with a fixed magnitude
+        BallObject.GetComponent<Rigidbody2D>().AddForce(throwDirection * throwSpeed);
+
+        Debug.Log("X pos = "+currentPosX);
+        Debug.Log("After = " + currentPosY);
     }
 }

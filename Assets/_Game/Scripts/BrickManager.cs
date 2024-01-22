@@ -12,7 +12,6 @@ public class BrickManager : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ball")
         {
-            Debug.Log("Collide");
             if (particle != null)
             {
                 Vector3 collisionPosition = collision.GetContact(0).point;
