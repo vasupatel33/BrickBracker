@@ -69,32 +69,29 @@ public class GameManager : MonoBehaviour
                     {
                         if (i == 1 || i == 5 || j == 1 || j == 5)
                         {
-                            //GameObject g;
-
-                            //if (i == 1)
-                            //{
-                            //    // Instantiate the same object when i == 1
-                            //    g = Instantiate(AllBricks[1], parent.transform);
-                            //}
-                            //else
-                            //{
-                            //    // Reselect from the list when i == 5
-                            //    g = Instantiate(AllBricks[0], parent.transform);
                             if (i == 1)
                             {
                                 // Instantiate the same object when i == 1
-                                g = Instantiate(SameObjectPrefab, parent.transform);
+                                g = Instantiate(AllBricks[0], parent.transform);
                             }
-                            else if (i == 5 || j == 1 || j == 5)
+                            else if (i == 5)
                             {
                                 // Instantiate different objects when i == 5, j == 1, or j == 5
-                                g = Instantiate(AllBricks[Random.Range(0, AllBricks.Count)], parent.transform);
+                                g = Instantiate(AllBricks[2], parent.transform);
                             }
-                            else
+                            else if(j == 5)
                             {
                                 // For other cases, you can handle it accordingly
                                 // For example, instantiate a default object or do nothing
-                                g = Instantiate(DefaultObjectPrefab, parent.transform);
+                                g = Instantiate(AllBricks[3], parent.transform);
+                            }
+                            else if(j == 1)
+                            {
+                                g = Instantiate(AllBricks[1], parent.transform);
+                            }
+                            else
+                            {
+                                g = Instantiate(AllBricks[6], parent.transform);
                             }
 
                             g.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
