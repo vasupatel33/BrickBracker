@@ -32,36 +32,77 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        int value = Random.Range(0,2);
-
-        switch(value)
+        int value = 2;//Random.Range(0,2);
+        GameObject g;
+        switch (value)
         {
             case 0:
                 for (int i = 1; i <= 5; i++)
                 {
-                    for (int j = 1; j <= 4; j++)
+                    for (int j = 1; j <= 5; j++)
                     {
-                        GameObject g = Instantiate(AllBricks[Random.Range(0, AllBricks.Count)], parent.transform);
-                        g.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
-                        g.transform.position = new Vector3(j * 1.2f, i, 0);
+                        g = Instantiate(AllBricks[Random.Range(0, AllBricks.Count)], parent.transform);
+                        g.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+                        g.transform.position = new Vector3(j * 1f, i * 0.9f, 0);
                     }
                 }
                 break;
             case 1:
                 for (int i = 1; i <= 5; i++)
                 {
-                    for (int j = 1; j <= 4; j++)
+                    for (int j = 1; j <= 5; j++)
                     {
-                        if (i == 1 || i == 5 || j == 1 || j == 4)
+                        if (i == 1 || i == 5 || j == 1 || j == 5 )
                         {
-                            GameObject g = Instantiate(AllBricks[Random.Range(0, AllBricks.Count)], parent.transform);
-                            g.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
-                            g.transform.position = new Vector3(j * 1.2f, i, 0);
+                            g = Instantiate(AllBricks[Random.Range(0, AllBricks.Count)], parent.transform);
+                            g.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+                            g.transform.position = new Vector3(j * 1f, i * 0.9f, 0);
                         }
                     }
                 }
                 break;
             case 2:
+
+                for (int i = 1; i <= 5; i++)
+                {
+                    for (int j = 1; j <= 5; j++)
+                    {
+                        if (i == 1 || i == 5 || j == 1 || j == 5)
+                        {
+                            //GameObject g;
+
+                            //if (i == 1)
+                            //{
+                            //    // Instantiate the same object when i == 1
+                            //    g = Instantiate(AllBricks[1], parent.transform);
+                            //}
+                            //else
+                            //{
+                            //    // Reselect from the list when i == 5
+                            //    g = Instantiate(AllBricks[0], parent.transform);
+                            if (i == 1)
+                            {
+                                // Instantiate the same object when i == 1
+                                g = Instantiate(SameObjectPrefab, parent.transform);
+                            }
+                            else if (i == 5 || j == 1 || j == 5)
+                            {
+                                // Instantiate different objects when i == 5, j == 1, or j == 5
+                                g = Instantiate(AllBricks[Random.Range(0, AllBricks.Count)], parent.transform);
+                            }
+                            else
+                            {
+                                // For other cases, you can handle it accordingly
+                                // For example, instantiate a default object or do nothing
+                                g = Instantiate(DefaultObjectPrefab, parent.transform);
+                            }
+
+                            g.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+                            g.transform.position = new Vector3(j * 1f, i * 0.9f, 0);
+                        }
+                    }
+                }
+
                 break;
             case 3:
                 break;
@@ -71,9 +112,11 @@ public class GameManager : MonoBehaviour
                 break;
         }
         
-        parent.transform.position = new Vector2(screenSize.x - screenSize.x * 2,screenSize.y - screenSize.y - 0.5f);
+        parent.transform.position = new Vector2(screenSize.x - (screenSize.x * 2 + 0.2f),screenSize.y - screenSize.y - 0.5f);
     }
-    public bool isRelease;
+    [SerializeField] List<GameObject> AllInstantiatedPref, AllReinstantiatedPref;
+    float row, col;
+    public bool isRelease; 
     Vector3 currentPos;
     float currentPosY;
     float currentPosX;
