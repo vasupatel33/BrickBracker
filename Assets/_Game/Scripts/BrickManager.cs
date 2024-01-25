@@ -8,7 +8,9 @@ public class BrickManager : MonoBehaviour
     [SerializeField] Sprite BrockenSprite;
     [SerializeField] GameObject parent;
     [SerializeField] ParticleSystem particle;
-    bool isTouch;
+
+    [SerializeField] Sprite SpecialSprite;
+    public bool isTouch, isSpecialObj;
 
     private void Start()
     {
