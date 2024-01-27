@@ -524,7 +524,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a4bf7a783f824949ba833a545936da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paddle: {fileID: 1625099086}
 --- !u!50 &407434771
 Rigidbody2D:
   serializedVersion: 4
@@ -1902,7 +1901,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -3.5, z: 0}
-  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
+  m_LocalScale: {x: 3.0256, y: 0.384, z: 0.9}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2015502544}
@@ -1952,8 +1951,8 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_DrawMode: 1
+  m_Size: {x: 0.55, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -2005,16 +2004,16 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0.36, y: 0.11, z: 0.39666668, w: 0.1}
+    border: {x: 0.08571429, y: 0.004285714, z: 0.084285714, w: 0.0057142857}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.6266667, y: 0.42666668}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 0.69714284, y: 0.18285714}
+    newSize: {x: 0.55, y: 1}
     adaptiveTilingThreshold: 0.5
-    drawMode: 0
+    drawMode: 1
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.6266667, y: 0.42666668}
+  m_Size: {x: 0.5, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &1694248456
 GameObject:
@@ -2229,12 +2228,15 @@ MonoBehaviour:
   - {fileID: 8175791167475109029, guid: 4afee6e03f02d4d4fa60a03b71a8c6ce, type: 3}
   - {fileID: 3734627263488469417, guid: 1224f75e8e092074bb8ca13f3405f4e8, type: 3}
   - {fileID: 2579534263882986045, guid: d258665bc4fb51d4f890ec6187249a3b, type: 3}
-  BallObject: {fileID: 407434766}
+  AllSelectedBricks: []
+  AllSelectAmongSelectedBricls: []
+  AllSpecialObjects:
+  - {fileID: 4768919357213368876, guid: fde656da95b5b0244980109d1b1c3972, type: 3}
+  AllBalls: []
+  BallObject: {fileID: 6702886244090123611, guid: 2d4f0ccc73b46eb4c8a6a2bcd419f263, type: 3}
   BallTargetObject: {fileID: 858667836}
   paddleObject: {fileID: 1625099086}
   screenSize: {x: 0, y: 0}
-  AllInstantiatedPref: []
-  AllReinstantiatedPref: []
   isRelease: 0
 --- !u!4 &1965434909
 Transform:

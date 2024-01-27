@@ -16,4 +16,26 @@ public class Paddle : MonoBehaviour
             transform.position = nextPos;
         }
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("trigger");
+        if (collision.gameObject.tag == "specialBall")
+        {
+            GameManager.instance.GenerateBall();
+            Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.tag == "specialPaddel")
+        {
+            Debug.Log("special padel");
+        }
+        if (collision.gameObject.tag == "specialSpeed")
+        {
+            Debug.Log("special speed");
+        }
+        if (collision.gameObject.tag == "specialBallFire")
+        {
+            Debug.Log("special Ball Fire");
+        }
+
+    }
 }

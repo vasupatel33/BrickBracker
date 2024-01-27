@@ -5,7 +5,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject LeftBorder, RightBorder, UpBorder, DownBorder, parent;
-    [SerializeField] List<GameObject> AllBricks, AllSelectedBricks, AllSelectAmongSelectedBricls;
+    [SerializeField] List<GameObject> AllBricks, AllSelectedBricks, AllSelectAmongSelectedBricls, AllSpecialObjects;
+
+    public List<GameObject> AllBalls;
 
     [SerializeField] GameObject BallObject, BallTargetObject, paddleObject;
     public static GameManager instance;
@@ -31,10 +33,15 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        if(GameObject.Find("Ball") != null)
+        {
+            GameObject ball = GameObject.Find("Ball");
+            AllBalls.Add(ball);
+        }
+
         AllSelectedBricks.Clear();
         int value = 1;
         GameObject g;
-        Bounds totalBounds = new Bounds(Vector3.zero, Vector3.zero);
 
 
         switch (value)
@@ -240,24 +247,22 @@ public class GameManager : MonoBehaviour
                 }
                 break;
 
-            default: 
+            default:
                 break;
         }
         parent.transform.position = new Vector2(screenSize.x - (screenSize.x * 2 + 0.1f), screenSize.y - screenSize.y - 0.2f);
 
-        for(int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
         {
             do
             {
                 val = Random.Range(0, AllSelectedBricks.Count);
-                AllSelectAmongSelectedBricls.Add(AllSelectedBricks[val]);
-                AllSelectedBricks[val].GetComponent<BrickManager>().isSpecialObj = true;
-            } while (AllSelectAmongSelectedBricls.Contains(AllSelectedBricks[val])) ;
-
+                Debug.Log("Val = " + val);
+            } while (AllSelectAmongSelectedBricls.Contains(AllSelectedBricks[val]));
+            AllSelectAmongSelectedBricls.Add(AllSelectedBricks[val]);
+            AllSelectedBricks[val].GetComponent<BrickManager>().isSpecialObj = true;
         }
     }
-
-    
     int val;
     public bool isRelease; 
     Vector3 currentPos;
@@ -311,9 +316,58 @@ public class GameManager : MonoBehaviour
         Vector2 throwDirection = new Vector2(currentPosX, currentPosY).normalized;
 
         // Apply force with a fixed magnitude
-        BallObject.GetComponent<Rigidbody2D>().AddForce(throwDirection * throwSpeed);
+        AllBalls[0].GetComponent<Rigidbody2D>().AddForce(throwDirection * throwSpeed);
 
         Debug.Log("X pos = "+currentPosX);
         Debug.Log("After = " + currentPosY);
+    }
+    public void SpecialObjectSpawn(Vector3 spawnPos, GameObject parent)
+    {
+        int val = Random.Range(0, AllSpecialObjects.Count);
+        GameObject g = Instantiate(AllSpecialObjects[val], spawnPos, Quaternion.identity, parent.transform);
+    }
+    public void GenerateBall()
+    {
+        Debug.Log("Ball generated");
+        Vector2 spawnPos = new Vector2(screenSize.x / 2, screenSize.y / 2);
+        GameObject obj = Instantiate(BallObject,spawnPos, Quaternion.identity);
+        AllBalls.Add(obj);
+        obj.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 200);
+    }
+    public void CheckingAllBallExist()
+    {
+        foreach (GameObject obj in AllBalls)
+        {
+            // Check if the object is null
+            if (obj == null)
+            {
+                Debug.Log("Ball removed");
+                AllBalls.Remove(obj);
+            }
+        }
+    }
+    public void CheckBrickAvailablity()
+    {
+        CheckingAllSelectedBrickExist();
+        if (AllSelectedBricks.Count <= 0)
+        {
+            Debug.LogError("Game overrrrrrrrrrrrrr");
+        }
+        else
+        {
+            Debug.Log("Else called");
+        }
+    }
+    public void CheckingAllSelectedBrickExist()
+    {
+        foreach (GameObject obj in AllSelectedBricks)
+        {
+            // Check if the object is null
+            if (obj == null)
+            {
+                Debug.Log("Ball removed");
+                AllSelectedBricks.Remove(obj);
+            }
+        }
     }
 }

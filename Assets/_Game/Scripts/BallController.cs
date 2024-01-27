@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class BallController : MonoBehaviour
 {
-    [SerializeField] GameObject paddle;
-    bool isRelease;
     // Update is called once per frame
     void Update()
     {
@@ -19,8 +17,25 @@ public class BallController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Over")
         {
-            Debug.Log("Over");
-            SceneManager.LoadScene(0);
+            Debug.Log("overr");
+            if (GameManager.instance.AllBalls.Count == 0)
+            {
+                Debug.Log("Over");
+                SceneManager.LoadScene(0);
+            }
+            else
+            {
+                Debug.Log("Else called");
+                Destroy(this.gameObject);
+                GameManager.instance.AllBalls.Remove(this.gameObject);;
+                GameManager.instance.CheckingAllBallExist();
+                if (GameManager.instance.AllBalls.Count == 0)
+                {
+                    Debug.Log("Game Over");
+                    SceneManager.LoadScene(0);
+                }
+            }
         }
     }
+    
 }

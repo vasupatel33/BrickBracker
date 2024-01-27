@@ -8,6 +8,10 @@ TagManager:
   - Brick
   - Brocken
   - Ball
+  - specialBall
+  - specialPaddel
+  - specialSpeed
+  - specialBallFire
   layers:
   - Default
   - TransparentFX

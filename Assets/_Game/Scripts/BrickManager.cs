@@ -9,11 +9,12 @@ public class BrickManager : MonoBehaviour
     [SerializeField] GameObject parent;
     [SerializeField] ParticleSystem particle;
 
-    [SerializeField] Sprite SpecialSprite;
+    [SerializeField] GameObject specialObject;
     public bool isTouch, isSpecialObj;
 
     private void Start()
     {
+        specialObject = Resources.Load("SpecialObj") as GameObject;
         parent = GameObject.Find("Bricks").transform.gameObject;
         particle = GameObject.Find("Particle").GetComponent<ParticleSystem>();
     }
@@ -21,9 +22,9 @@ public class BrickManager : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ball")
         {
+            GameManager.instance.CheckBrickAvailablity();
             if (!isTouch)
             {
-                Debug.Log("COllide");
                 isTouch = true;
                 this.gameObject.GetComponent<SpriteRenderer>().sprite = BrockenSprite;
             }
@@ -32,8 +33,13 @@ public class BrickManager : MonoBehaviour
                 Vector3 collisionPosition = collision.contacts[0].point;
 
                 particle.transform.position = collisionPosition;
-                Debug.Log("Destroy");
                 particle.Play();
+                if (isSpecialObj)
+                {
+                    Debug.Log("Special");
+                    GameManager.instance.SpecialObjectSpawn(collision.transform.position, parent);
+                    //Instantiate(specialObject, collision.transform.position, Quaternion.identity, parent.transform);
+                }
                 Destroy(this.gameObject);
             }
         }
