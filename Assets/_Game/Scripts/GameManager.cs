@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
         }
 
         AllSelectedBricks.Clear();
-        int value = 1;
+        int value = 4;
         GameObject g;
 
 
