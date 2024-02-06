@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        Debug.Log("Start called");
         if(GameObject.Find("Ball") != null)
         {
             GameObject ball = GameObject.Find("Ball");
@@ -40,13 +41,15 @@ public class GameManager : MonoBehaviour
         }
 
         AllSelectedBricks.Clear();
-        int value = 4;
+        int value = 6;
+        Debug.Log("val = "+value);
         GameObject g;
 
 
         switch (value)
         {
             case 0:
+                Debug.Log("11");
                 for (int i = 1; i <= 5; i++)
                 {
                     for (int j = 1; j <= 5; j++)
