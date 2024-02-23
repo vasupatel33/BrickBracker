@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5908975350893343899}
   - component: {fileID: 6706302703286577168}
   - component: {fileID: 2618998451340707979}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ball
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6702886244090123611}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.37533972, w: 0.92688733}
+  m_LocalRotation: {x: 0, y: 0, z: -0.054444153, w: 0.99851686}
   m_LocalPosition: {x: 0, y: -3, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 0
@@ -235,12 +235,20 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2303159552181832209, guid: 348489aba3d9e494f9704873cf70a82b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303159552181832209, guid: 348489aba3d9e494f9704873cf70a82b, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4107030353238054634, guid: 348489aba3d9e494f9704873cf70a82b, type: 3}
       propertyPath: m_Name
       value: Particles
+      objectReference: {fileID: 0}
+    - target: {fileID: 4107030353238054634, guid: 348489aba3d9e494f9704873cf70a82b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4107030353238054634, guid: 348489aba3d9e494f9704873cf70a82b, type: 3}
       propertyPath: m_IsActive
@@ -285,6 +293,10 @@ PrefabInstance:
     - target: {fileID: 7314321489339260408, guid: 348489aba3d9e494f9704873cf70a82b, type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
       value: 0.9811321
+      objectReference: {fileID: 0}
+    - target: {fileID: 8924235657194372818, guid: 348489aba3d9e494f9704873cf70a82b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8924235657194372818, guid: 348489aba3d9e494f9704873cf70a82b, type: 3}
       propertyPath: m_IsActive

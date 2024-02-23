@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class BallController : MonoBehaviour
 {
+    bool isFireBall;
     // Update is called once per frame
     void Update()
     {

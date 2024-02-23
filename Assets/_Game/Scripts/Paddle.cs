@@ -26,7 +26,10 @@ public class Paddle : MonoBehaviour
         }
         if (collision.gameObject.tag == "specialPaddel")
         {
+            GameManager.instance.PaddleWidthIncrease();
+            Destroy(collision.gameObject);
             Debug.Log("special padel");
+
         }
         if (collision.gameObject.tag == "specialSpeed")
         {

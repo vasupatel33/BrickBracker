@@ -15,7 +15,7 @@ public class BrickManager : MonoBehaviour
     private void Start()
     {
         specialObject = Resources.Load("SpecialObj") as GameObject;
-        parent = GameObject.Find("BricksDesign2").transform.gameObject;
+        //parent = GameObject.Find("BricksDesign2").transform.gameObject;
         particle = GameObject.Find("Particle").GetComponent<ParticleSystem>();
     }
     private void OnCollisionEnter2D(Collision2D collision)
