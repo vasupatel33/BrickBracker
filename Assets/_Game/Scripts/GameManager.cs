@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject LeftBorder, RightBorder, UpBorder, DownBorder, Paddle;
-    [SerializeField] List<GameObject> AllBricksDesign, SelectedBricksDesign, AllSelectAmongSelectedBricls, AllSpecialObjects;
+    [SerializeField] List<GameObject> AllBricksDesign, SelectedBricksDesign, AllSpecialObjects;
 
     public List<GameObject> AllBalls;
 
@@ -99,18 +99,14 @@ public class GameManager : MonoBehaviour
         Debug.Log("X pos = " + currentPosX);
         Debug.Log("After = " + currentPosY);
     }
-    private List<GameObject> instantiatedObjects = new List<GameObject>(); // List to keep track of instantiated objects
-
-    public void SpecialObjectSpawn(Vector3 spawnPos, GameObject parent)
+    
+    public void SpecialObjectSpawn(Vector3 spawnPos)
     {
-        int val = Random.Range(0, AllSpecialObjects.Count);
+        GameObject g;
+        int val;
+        val = Random.Range(0, AllSpecialObjects.Count);
 
-        // Check if the object has already been instantiated
-        if (!instantiatedObjects.Contains(AllSpecialObjects[val]))
-        {
-            GameObject g = Instantiate(AllSpecialObjects[val], spawnPos, Quaternion.identity, parent.transform);
-            instantiatedObjects.Add(g); // Add the instantiated object to the list
-        }
+        Instantiate(AllSpecialObjects[val], spawnPos, Quaternion.identity);
     }
 
     public void GenerateBall()
@@ -125,6 +121,23 @@ public class GameManager : MonoBehaviour
     {
         Paddle.GetComponent<SpriteRenderer>().size = new Vector2(Paddle.GetComponent<SpriteRenderer>().size.x + 0.07f, Paddle.GetComponent<SpriteRenderer>().size.y);
         Paddle.GetComponent<BoxCollider2D>().size = new Vector2(Paddle.GetComponent<BoxCollider2D>().size.x + 0.07f, Paddle.GetComponent<BoxCollider2D>().size.y);
+    }
+    public void ConvertIntoFireBall()
+    {
+        foreach(GameObject obj in AllBalls)
+        {
+            obj.GetComponent<BallController>().isFireBall = true;
+            StartCoroutine(WaitForFireBallToNormal());
+        }
+    }
+    IEnumerator WaitForFireBallToNormal()
+    {
+        yield return new WaitForSeconds(5);
+        Debug.Log("Ball normal convert");
+        foreach (GameObject obj in AllBalls)
+        {
+            obj.GetComponent<BallController>().isFireBall = false;
+        }
     }
     public void CheckingAllBallExist()
     {

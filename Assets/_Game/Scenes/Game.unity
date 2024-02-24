@@ -1852,7 +1852,7 @@ GameObject:
   - component: {fileID: 1625099087}
   - component: {fileID: 1625099088}
   - component: {fileID: 1625099089}
-  - component: {fileID: 1625099090}
+  - component: {fileID: 1625099091}
   m_Layer: 0
   m_Name: Paddle
   m_TagString: Untagged
@@ -1939,7 +1939,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eae36e974e70204497fff620aec13db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!61 &1625099090
+--- !u!61 &1625099091
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1982,8 +1982,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 1}
-  m_EdgeRadius: 0
+  m_Size: {x: 0.35, y: 0.01}
+  m_EdgeRadius: 0.2
 --- !u!1 &1694248456
 GameObject:
   m_ObjectHideFlags: 0
@@ -2193,10 +2193,8 @@ MonoBehaviour:
   - {fileID: 7337370354047826503, guid: 28ffd56ffa18330429de37013863ec3f, type: 3}
   - {fileID: 4877151137141871349, guid: a6430270ccd7a4045b4e959ff4bf4ec8, type: 3}
   SelectedBricksDesign: []
-  AllSelectAmongSelectedBricls: []
   AllSpecialObjects:
-  - {fileID: 4768919357213368876, guid: fde656da95b5b0244980109d1b1c3972, type: 3}
-  - {fileID: 5835570112060326735, guid: 8406d6eaa053d8245baef4c649d5d296, type: 3}
+  - {fileID: 7655796122481953358, guid: c24d166c916e1b445a3acd578d4f5500, type: 3}
   AllBalls: []
   BallObject: {fileID: 6702886244090123611, guid: 2d4f0ccc73b46eb4c8a6a2bcd419f263, type: 3}
   BallTargetObject: {fileID: 858667836}

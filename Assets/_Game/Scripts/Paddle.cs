@@ -12,7 +12,7 @@ public class Paddle : MonoBehaviour
             nextPos.z = 0;
             nextPos.y = transform.position.y;
 
-            nextPos.x = Mathf.Clamp(nextPos.x, -GameManager.instance.screenSize.x + transform.GetComponent<BoxCollider2D>().size.x / 2, GameManager.instance.screenSize.x - transform.GetComponent<BoxCollider2D>().size.x / 2);
+            nextPos.x = Mathf.Clamp(nextPos.x, -GameManager.instance.screenSize.x + transform.GetComponent<SpriteRenderer>().size.x / 2, GameManager.instance.screenSize.x - transform.GetComponent<SpriteRenderer>().size.x / 2);
             transform.position = nextPos;
         }
     }
@@ -37,7 +37,8 @@ public class Paddle : MonoBehaviour
         }
         if (collision.gameObject.tag == "specialBallFire")
         {
-            Debug.Log("special Ball Fire");
+            Destroy(collision.gameObject);
+            GameManager.instance.ConvertIntoFireBall();
         }
 
     }

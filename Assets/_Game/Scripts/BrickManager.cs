@@ -23,10 +23,27 @@ public class BrickManager : MonoBehaviour
         if (collision.gameObject.tag == "Ball")
         {
             GameManager.instance.CheckBrickAvailablity();
-            if (!isTouch)
+            bool isFireGameObj = collision.gameObject.GetComponent<BallController>().isFireBall;
+
+            if (!isFireGameObj)
             {
-                isTouch = true;
-                this.gameObject.GetComponent<SpriteRenderer>().sprite = BrockenSprite;
+                if (!isTouch)
+                {
+                    isTouch = true;
+                    this.gameObject.GetComponent<SpriteRenderer>().sprite = BrockenSprite;
+                }
+                else
+                {
+                    Vector3 collisionPosition = collision.contacts[0].point;
+
+                    particle.transform.position = collisionPosition;
+                    particle.Play();
+                    if (isSpecialObj)
+                    {
+                        GameManager.instance.SpecialObjectSpawn(collision.transform.position);
+                    }
+                    Destroy(this.gameObject);
+                }
             }
             else
             {
@@ -37,8 +54,7 @@ public class BrickManager : MonoBehaviour
                 if (isSpecialObj)
                 {
                     Debug.Log("Special");
-                    GameManager.instance.SpecialObjectSpawn(collision.transform.position, parent);
-                    //Instantiate(specialObject, collision.transform.position, Quaternion.identity, parent.transform);
+                    GameManager.instance.SpecialObjectSpawn(collision.transform.position);
                 }
                 Destroy(this.gameObject);
             }
