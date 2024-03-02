@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] GameObject LeftBorder, RightBorder, UpBorder, DownBorder, Paddle;
+    [SerializeField] GameObject LeftBorder, RightBorder, UpBorder, DownBorder, Paddle, GameOverPanel, PausePanel;
     [SerializeField] List<GameObject> AllBricksDesign, SelectedBricksDesign, AllSpecialObjects;
 
     public List<GameObject> AllBalls;
@@ -156,6 +157,7 @@ public class GameManager : MonoBehaviour
         Debug.Log(SelectedBricksDesign[0].transform.childCount);
         if (SelectedBricksDesign[0].transform.childCount <= 0)
         {
+            GameOverPanel.SetActive(true);
             Debug.LogError("Game overrrrrrrrrrrrrr");
         }
         else
@@ -199,5 +201,16 @@ public class GameManager : MonoBehaviour
             Debug.LogError("Canvas not found!");
         }
     }
-
+    public void OnClick_ResetBtn()
+    {
+        SceneManager.LoadScene(1);
+    }
+    public void OnClick_HomeBtn()
+    {
+        SceneManager.LoadScene(0);
+    }
+    public void OnClick_ResumeBtn()
+    {
+        PausePanel.SetActive(false);
+    }
 }
