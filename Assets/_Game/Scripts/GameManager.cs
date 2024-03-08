@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -9,8 +11,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<GameObject> AllBricksDesign, SelectedBricksDesign, AllSpecialObjects;
 
     public List<GameObject> AllBalls;
-
     [SerializeField] GameObject BallObject, BallTargetObject, paddleObject;
+    [SerializeField] AudioClip ClickSound, DestroySound, GameOverSound;
     public static GameManager instance;
     public Vector2 screenSize;
     bool isHold;
@@ -34,6 +36,10 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        PausePanel.SetActive(false);
+        GameOverPanel.SetActive(false);
+        Time.timeScale = 1;
+
         if (GameObject.Find("Ball") != null)
         {
             GameObject ball = GameObject.Find("Ball");
@@ -56,19 +62,25 @@ public class GameManager : MonoBehaviour
             //Debug.Log("Release called");
             if (Input.GetMouseButton(0))
             {
-                currentPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                currentPosX = Mathf.Clamp(currentPos.x, -3, 3);
-                currentPosY = Mathf.Abs(currentPos.y);
-                //Debug.Log("X val = " + currentPosX);
-                //Debug.Log("YY val = " + currentPosY);
-                BallTargetObject.transform.up = new Vector3(currentPosX, currentPosY, 0);
+                if (!EventSystem.current.IsPointerOverGameObject())
+                {
+                    currentPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    currentPosX = Mathf.Clamp(currentPos.x, -3, 3);
+                    currentPosY = Mathf.Abs(currentPos.y);
+                    //Debug.Log("X val = " + currentPosX);
+                    //Debug.Log("YY val = " + currentPosY);
+                    BallTargetObject.transform.up = new Vector3(currentPosX, currentPosY, 0);
+                }
             }
             if (Input.GetMouseButtonUp(0))
             {
-                BallObject.transform.up = new Vector3(currentPos.x, currentPosY, 0);
-                ThrowBall();
-                BallTargetObject.SetActive(false);
-                isRelease = true;
+                if (!EventSystem.current.IsPointerOverGameObject())
+                {
+                    BallObject.transform.up = new Vector3(currentPos.x, currentPosY, 0);
+                    ThrowBall();
+                    BallTargetObject.SetActive(false);
+                    isRelease = true;
+                }
             }
         }
     }
@@ -76,9 +88,9 @@ public class GameManager : MonoBehaviour
     public void ThrowBall()
     {
         throwSpeed = 200;
+        Common.Instance.gameObject.transform.GetChild(0).GetComponent<AudioSource>().PlayOneShot(ClickSound);
         if (currentPosY > 1.2f || currentPosX > 1.2f)
         {
-            Debug.Log("Iff");
             throwSpeed = 250;
         }
         else if (currentPosY < 0.5f || currentPosX < 0.5f)
@@ -87,7 +99,6 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("else");
             throwSpeed = 220;
         }
         //BallObject.GetComponent<Rigidbody2D>().velocity = new Vector3(currentPosX, currentPosY, 0);
@@ -96,9 +107,6 @@ public class GameManager : MonoBehaviour
 
         // Apply force with a fixed magnitude
         AllBalls[0].GetComponent<Rigidbody2D>().AddForce(throwDirection * throwSpeed);
-
-        Debug.Log("X pos = " + currentPosX);
-        Debug.Log("After = " + currentPosY);
     }
     
     public void SpecialObjectSpawn(Vector3 spawnPos)
@@ -112,7 +120,6 @@ public class GameManager : MonoBehaviour
 
     public void GenerateBall()
     {
-        Debug.Log("Ball generated");
         Vector2 spawnPos = new Vector2(screenSize.x / 2, screenSize.y / 2);
         GameObject obj = Instantiate(BallObject, spawnPos, Quaternion.identity);
         AllBalls.Add(obj);
@@ -154,10 +161,13 @@ public class GameManager : MonoBehaviour
     }
     public void CheckBrickAvailablity()
     {
+        Common.Instance.gameObject.transform.GetChild(0).GetComponent<AudioSource>().PlayOneShot(ClickSound);
         Debug.Log(SelectedBricksDesign[0].transform.childCount);
-        if (SelectedBricksDesign[0].transform.childCount <= 0)
+        if (SelectedBricksDesign[0].transform.childCount <= 1)
         {
+            Common.Instance.gameObject.transform.GetChild(0).GetComponent<AudioSource>().PlayOneShot(GameOverSound);
             GameOverPanel.SetActive(true);
+            Time.timeScale = 1;
             Debug.LogError("Game overrrrrrrrrrrrrr");
         }
         else
@@ -201,16 +211,32 @@ public class GameManager : MonoBehaviour
             Debug.LogError("Canvas not found!");
         }
     }
+    public void PausePanelOpen()
+    {
+        Common.Instance.gameObject.transform.GetChild(0).GetComponent<AudioSource>().PlayOneShot(ClickSound);
+        PausePanel.SetActive(true);
+        Time.timeScale = 0;
+    }
     public void OnClick_ResetBtn()
     {
-        SceneManager.LoadScene(1);
+        Common.Instance.gameObject.transform.GetChild(0).GetComponent<AudioSource>().PlayOneShot(ClickSound);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        PausePanel.SetActive(false);
+        GameOverPanel.SetActive(false);
+        Time.timeScale = 1;
     }
     public void OnClick_HomeBtn()
     {
+        Common.Instance.gameObject.transform.GetChild(0).GetComponent<AudioSource>().PlayOneShot(ClickSound);
         SceneManager.LoadScene(0);
+        PausePanel.SetActive(false);
+        GameOverPanel.SetActive(false);
+        Time.timeScale = 1;
     }
     public void OnClick_ResumeBtn()
     {
+        Common.Instance.gameObject.transform.GetChild(0).GetComponent<AudioSource>().PlayOneShot(ClickSound);
         PausePanel.SetActive(false);
+        Time.timeScale = 1;
     }
 }

@@ -19,7 +19,7 @@ public class BallController : MonoBehaviour
             Debug.Log("overr");
             if (GameManager.instance.AllBalls.Count == 0)
             {
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene(1);
             }
             else
             {
@@ -29,7 +29,7 @@ public class BallController : MonoBehaviour
                 if (GameManager.instance.AllBalls.Count == 0)
                 {
                     Debug.Log("Game Over");
-                    SceneManager.LoadScene(0);
+                    SceneManager.LoadScene(1);
                 }
             }
         }
